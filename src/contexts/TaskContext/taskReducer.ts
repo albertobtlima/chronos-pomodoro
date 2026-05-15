@@ -22,7 +22,6 @@ export function taskReducer(
         tasks: [...state.tasks, newTask],
       };
     }
-
     case TaskActionTypes.INTERRUPT_TASK: {
       return {
         ...state,
@@ -37,7 +36,6 @@ export function taskReducer(
         }),
       };
     }
-
     case TaskActionTypes.COMPLETE_TASK: {
       return {
         ...state,
@@ -52,11 +50,20 @@ export function taskReducer(
         }),
       };
     }
-
     case TaskActionTypes.RESET_STATE: {
       return state;
     }
+    case TaskActionTypes.COUNT_DOWN: {
+      return {
+        ...state,
+        secondsRemaining: action.payload.secondsRemaining,
+        formattedSecondsRemaining: formatSecondsToMinutes(
+          action.payload.secondsRemaining
+        ),
+      };
+    }
   }
 
+  // Sempre deve retornar o estado
   return state;
 }
